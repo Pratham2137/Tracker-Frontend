@@ -1,1 +1,87 @@
 @import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------------------------------------
+ 🧩 THEME DEFINITIONS (Tailwind v4)
+--------------------------------------- */
+@theme {
+  /* 🎨 Brand Colors */
+  --color-primary: #FF7A30;
+  --color-primary-dark: #E5671E;
+
+  /* 🌤 Light Mode Colors */
+  --color-background: #DDE6ED;
+  --color-surface: #9DB2BF;
+  --color-heading: #27374D;
+  --color-text: #526D82;
+  --color-border: #C7D1DA;
+  --color-link: #27374D;
+  --color-link-hover: #FF7A30;
+
+  /* 🌙 Dark Mode Colors */
+  --color-background-dark: #12181F;
+  --color-surface-dark: #1E2A35;
+  --color-heading-dark: #E9E9E9;
+  --color-text-dark: #B0BEC5;
+  --color-border-dark: #2A3B47;
+  --color-link-dark: #FF7A30;
+  --color-link-hover-dark: #FFD8BF;
+
+  /* ✅ Status */
+  --color-success: #4CAF50;
+  --color-success-dark: #81C784;
+  --color-error: #E74C3C;
+  --color-error-dark: #E57373;
+
+  /* ✍️ Fonts & Easing */
+  --font-sans: "Inter", system-ui, sans-serif;
+  --ease-fluid: cubic-bezier(0.3, 0, 0, 1);
+}
+
+/* ---------------------------------------
+ 🧱 GLOBAL BASE STYLING
+--------------------------------------- */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-text dark:bg-background-dark dark:text-text-dark transition-colors duration-500 font-sans;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-heading dark:text-heading-dark font-semibold;
+  }
+
+  a {
+    @apply text-link hover:text-link-hover dark:text-link-dark dark:hover:text-link-hover-dark transition-colors;
+  }
+
+  ::selection {
+    background-color: var(--color-primary);
+    color: white;
+  }
+}
+
+/* ---------------------------------------
+ 🧩 COMPONENT STYLES
+--------------------------------------- */
+@layer components {
+  .btn-primary {
+    @apply bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark transition-colors;
+  }
+
+  .btn-secondary {
+    @apply border border-primary text-primary px-4 py-2 rounded-lg hover:bg-primary hover:text-white transition-colors;
+  }
+
+  .card {
+    @apply bg-surface dark:bg-surface-dark border border-border dark:border-border-dark rounded-2xl p-4 shadow-sm transition-colors;
+  }
+
+  .input {
+    @apply w-full bg-surface dark:bg-surface-dark border border-border dark:border-border-dark text-text dark:text-text-dark rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary/60 transition-colors;
+  }
+}
