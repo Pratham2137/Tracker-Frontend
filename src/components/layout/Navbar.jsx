@@ -55,10 +55,9 @@ export default function Navbar() {
           </button>
 
           {/* Mobile-only theme toggle */}
-          <ThemeToggle variant="inline" className="w-10 h-10 md:hidden" />
           <div className="relative" ref={ddRef}>
             <button
-              className="relative inline-flex items-center justify-center mr-5 h-10 w-10 rounded-md hover:bg-surface dark:hover:bg-surface-dark"
+              className="relative inline-flex items-center justify-center mr-3 h-10 w-10 rounded-md hover:bg-surface dark:hover:bg-surface-dark"
               onClick={() => setOpen((s) => !s)}
               aria-haspopup="menu"
               aria-expanded={open}
@@ -88,6 +87,7 @@ export default function Navbar() {
               </div>
             )}
           </div>
+          <ThemeToggle variant="inline" className="w-10 h-10 mr-3 cursor-pointer" />
 
           <Link
             to="/profile"

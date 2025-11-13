@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import { Home as HomeIcon, Settings, ChevronsLeft, ChevronsRight } from 'lucide-react'
+import { Home as HomeIcon, Settings, ChevronsLeft, ChevronsRight, LogIn } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
 export default function Sidebar({ open, onClose }) {
@@ -52,6 +52,8 @@ export default function Sidebar({ open, onClose }) {
     >
       <nav className={`flex-1 px-3 py-4 space-y-1 overflow-y-auto ${collapsed ? 'px-2' : ''}`}>
         <SidebarLink to="/" icon={<HomeIcon size={18} />} collapsed={collapsed}>Home</SidebarLink>
+        <SidebarLink to="/login" icon={<LogIn size={18} />} collapsed={collapsed}>Login</SidebarLink>
+
         {/* Future links */}
       </nav>
 

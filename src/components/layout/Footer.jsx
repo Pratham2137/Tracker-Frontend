@@ -10,10 +10,7 @@ export default function Footer() {
           <a href="#" className="hover:underline">Privacy</a>
           <a href="#" className="hover:underline">Help</a>
         </div>
-        <div className="flex items-center justify-center sm:justify-end">
-          {/* Hidden on mobile; toggle now appears in navbar there */}
-          <ThemeToggle variant="inline" className="w-10 h-10 hidden md:flex" />
-        </div>
+        
       </div>
     </footer>
   )
