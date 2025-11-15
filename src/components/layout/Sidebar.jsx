@@ -47,7 +47,7 @@ export default function Sidebar({ open, onClose }) {
   // Desktop sidebar
   return (
     <aside
-      className={`${collapsed ? 'w-16' : 'w-64'} bg-background dark:bg-background-dark border-r border-border dark:border-border-dark flex flex-col shadow-none transition-all ease-in-out duration-300 z-40`}
+      className={`${collapsed ? 'w-16' : 'w-64'} bg-background md:fixed md:top-14 md:bottom-0 md:left-0 dark:bg-background-dark border-r border-t border-border dark:border-border-dark flex flex-col shadow-none transition-all ease-in-out duration-300 z-40`}
       aria-label="Sidebar navigation"
     >
       <nav className={`flex-1 px-3 py-4 space-y-1 overflow-y-auto ${collapsed ? 'px-2' : ''}`}>
@@ -64,7 +64,7 @@ export default function Sidebar({ open, onClose }) {
         </div>
         <button
           onClick={() => setCollapsed((v) => !v)}
-          className={`flex items-center w-full justify-center px-3 py-2 text-xs font-medium border-t border-border dark:border-border-dark hover:bg-surface dark:hover:bg-surface-dark transition-colors`}
+          className={`flex items-center w-full justify-center h-11 px-3 py-3 text-xs font-medium border-t border-border dark:border-border-dark hover:bg-surface dark:hover:bg-surface-dark transition-colors`}
           aria-label="Toggle collapse"
           title={collapsed ? 'Expand' : 'Collapse'}
         >
