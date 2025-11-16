@@ -1,6 +1,10 @@
 import { useState } from 'react'
 import { Eye, EyeOff, Mail, Lock, Chrome, Github } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+
+
 
 export default function Login() {
   const [email, setEmail] = useState('')
@@ -9,29 +13,55 @@ export default function Login() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    setError('')
-    setIsLoading(true)
+const navigate = useNavigate();  // 👈 Add this
 
-    try {
-      // TODO: Implement actual login API call
-      if (!email || !password) {
-        setError('Please fill in all fields')
-        setIsLoading(false)
-        return
-      }
-      
-      // Simulate API call
-      setTimeout(() => {
-        setIsLoading(false)
-        // TODO: Redirect to home after successful login
-      }, 1500)
-    } catch (err) {
-      setError(err.message || 'Login failed. Please try again.')
-      setIsLoading(false)
+ useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/Home", { replace: true });
     }
+  }, []);
+
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setError('');
+  setIsLoading(true);
+
+  try {
+    if (!email || !password) {
+      setError("Please fill in all fields");
+      setIsLoading(false);
+      return;
+    }
+
+    const response = await fetch("http://localhost:8000/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      setError(data.message || "Invalid email or password");
+      setIsLoading(false);
+      return;
+    }
+
+    localStorage.setItem("token", data.token);
+
+    setIsLoading(false);
+
+    // ⭐ Redirect after success
+   navigate("/Home", { replace: true });
+
+  } catch (err) {
+    setError("Something went wrong. Try again.");
+    setIsLoading(false);
   }
+};
+
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-12">

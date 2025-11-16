@@ -56,30 +56,50 @@ export default function Signup() {
     return true;
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
-    setSuccess(false);
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setError("");
+  setSuccess(false);
 
-    if (!validateForm()) {
+  if (!validateForm()) {
+    return;
+  }
+
+  setIsLoading(true);
+
+  try {
+    const response = await fetch("http://localhost:8000/api/auth/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        username: formData.fullName,
+        email: formData.email,
+        password: formData.password
+      })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      setError(data.message || data.error || "Signup failed");
+      setIsLoading(false);
       return;
     }
 
-    setIsLoading(true);
+    // success
+    setSuccess(true);
+    setIsLoading(false);
 
-    try {
-      // TODO: Implement actual signup API call
-      // Simulate API call
-      setTimeout(() => {
-        setIsLoading(false);
-        setSuccess(true);
-        // TODO: Redirect to login after successful signup
-      }, 1500);
-    } catch (err) {
-      setError(err.message || "Signup failed. Please try again.");
-      setIsLoading(false);
-    }
-  };
+    // redirect to login in 2 sec
+    setTimeout(() => {
+      window.location.href = "/login";
+    }, 2000);
+
+  } catch (err) {
+    setError("Server error. Please try again.");
+    setIsLoading(false);
+  }
+};
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-12">
