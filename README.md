@@ -1,16 +1,50 @@
-# React + Vite
+# Tracker Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React + Vite app with Tailwind v4. This repo now includes a production-grade folder structure to scale features cleanly.
 
-Currently, two official plugins are available:
+## Project structure
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```
+src/
+	assets/                 # static assets
+	components/             # shared UI
+		common/               # generic, reusable UI (Button, Card, Input)
+		layout/               # layout parts (Navbar, Footer, Sidebar)
+	features/               # domain slices (e.g., habits, auth)
+	hooks/                  # reusable React hooks
+	pages/                  # route-level views
+	routes/                 # route configuration
+	services/               # API client(s) and integrations
+		apiClient.js
+	store/                  # Redux Toolkit store and slices
+		index.js
+	styles/                 # global style modules (beyond Tailwind)
+	types/                  # shared typedefs (for TS/JSDoc)
+	App.jsx
+	main.jsx
+	index.css               # Tailwind entry
+```
 
-## React Compiler
+Path alias is configured:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- `@` -> `src` (use like `import Button from '@/components/common/Button'`)
 
-## Expanding the ESLint configuration
+## Environment
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Copy `.env.example` to `.env` and set values as needed:
+
+```
+VITE_API_URL=https://api.example.com
+```
+
+## Scripts
+
+- `npm run dev` — start dev server
+- `npm run build` — production build
+- `npm run preview` — preview build locally
+- `npm run lint` — run ESLint
+
+## Notes
+
+- The Redux store (`src/store/index.js`) and the route config (`src/routes/index.jsx`) are scaffolded but not yet wired to `main.jsx` to avoid breaking the current UI. When ready, wrap `<App />` with `<Provider store={store}>` and add a router.
+- Tailwind is already set up via `index.css` and `@tailwindcss/vite`.
