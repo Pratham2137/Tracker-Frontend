@@ -87,17 +87,16 @@ export default function Navbar() {
               </div>
             )}
           </div>
-          <ThemeToggle variant="inline" className="w-10 h-10 mr-3 cursor-pointer" />
+          <ThemeToggle variant="inline" className="w-10 h-10 mr-8 cursor-pointer" />
 
           <Link
             to="/profile"
-            className="inline-flex items-center gap-2 h-10 px-3 rounded-md bg-primary text-white hover:bg-primary-dark"
+            className="inline-flex items-center w-10 h-10 rounded-full overflow-hidden bg-primary text-white hover:bg-primary-dark"
             title="Profile"
           >
-            <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center">
+            <div className="h-full w-full rounded-full flex items-center  justify-center">
               <User size={16} />
             </div>
-            <span className="hidden sm:inline">Profile</span>
           </Link>
         </div>
       </div>

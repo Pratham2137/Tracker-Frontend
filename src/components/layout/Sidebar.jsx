@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import { Home as HomeIcon, Settings, ChevronsLeft, ChevronsRight, LogIn } from 'lucide-react'
+import { Home as HomeIcon, Settings, ChevronsLeft, ChevronsRight, LogIn, Layers, CheckSquare } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
 export default function Sidebar({ open, onClose }) {
@@ -47,18 +47,20 @@ export default function Sidebar({ open, onClose }) {
   // Desktop sidebar
   return (
     <aside
-      className={`${collapsed ? 'w-16' : 'w-64'} bg-background md:fixed md:top-14 md:bottom-0 md:left-0 dark:bg-background-dark border-r border-t border-border dark:border-border-dark flex flex-col shadow-none transition-all ease-in-out duration-300 z-40`}
+      className={`${collapsed ? 'w-16' : 'w-52'} bg-background md:fixed md:top-14 md:bottom-0 md:left-0 dark:bg-background-dark border-r border-t border-border dark:border-border-dark flex flex-col shadow-none transition-all ease-in-out duration-300 z-40`}
       aria-label="Sidebar navigation"
     >
-      <nav className={`flex-1 px-3 py-4 space-y-1 overflow-y-auto ${collapsed ? 'px-2' : ''}`}>
-        <SidebarLink to="/" icon={<HomeIcon size={18} />} collapsed={collapsed}>Home</SidebarLink>
+      <nav className={`flex-1 px-3 py-4 space-y-1 gap-2 overflow-y-auto ${collapsed ? 'px-2' : 'px-3'}`}>
+        <SidebarLink to="/" icon={<HomeIcon size={20} />} collapsed={collapsed}>Home</SidebarLink>
+        <SidebarLink to="/program" icon={<Layers size={20} />} collapsed={collapsed}>Program</SidebarLink>
+        <SidebarLink to="/task" icon={<CheckSquare size={20} />} collapsed={collapsed}>Task</SidebarLink>       
         {/* Future links */}
       </nav>
 
       <div className="mt-auto">
         {/* Settings link just above the collapse button */}
         <div className="px-3 py-2 border-t border-border dark:border-border-dark">
-          <SidebarLink to="/settings" icon={<Settings size={18} />} collapsed={collapsed}>Settings</SidebarLink>
+          <SidebarLink to="/settings" icon={<Settings size={20} />} collapsed={collapsed}>Settings</SidebarLink>
         </div>
         <button
           onClick={() => setCollapsed((v) => !v)}
@@ -79,7 +81,7 @@ function SidebarLink({ to, children, icon, collapsed }) {
       to={to}
       end
       className={({ isActive }) =>
-        `group flex items-center ${collapsed ? 'justify-center' : ''} gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+        `group flex items-center ${collapsed ? 'justify-center' : ''} gap-2.5 px-3 mt-1.5 py-2 rounded-md text-sm font-medium transition-colors ${
           isActive
             ? 'bg-primary text-white shadow-sm'
             : 'text-text dark:text-text-dark hover:bg-surface dark:hover:bg-surface-dark'
