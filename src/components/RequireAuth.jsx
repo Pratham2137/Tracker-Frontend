@@ -12,4 +12,5 @@ export default function RequireAuth({ children }) {
 
   // If children provided, render them; otherwise render null
   return children ?? null
+  
 }

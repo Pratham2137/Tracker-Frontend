@@ -5,6 +5,7 @@ const API_BASE = import.meta.env.VITE_API_URL || "";
 export async function api(path, { method = 'GET', body, headers = {}, ...rest } = {}) {
   const opts = {
     method,
+    credentials: credentials ?? 'include', // send cookies by default
     headers: {
       'Content-Type': 'application/json',
       ...headers,
