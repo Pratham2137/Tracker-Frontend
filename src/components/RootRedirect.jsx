@@ -7,6 +7,6 @@ import Home from '@/pages/Home'
 export default function RootRedirect() {
   const user = useSelector((s) => s.auth.userData)
 
-  if (user) return <Home />
+  if (user) return <Navigate to="/Home" replace />
   return <Login />
 }
